@@ -29,7 +29,7 @@ def load_file():
 def process_file(file_path):
     global graph  # 声明使用全局变量 graph
     with open(file_path, 'r', encoding='utf-8') as f:  # 打开文件，指定编码为 utf-8
-        l = f.readline()  # 读取文件的第一行
+        l = f.readline().lower()  # 读取文件的第一行
         transtab = str.maketrans(punctuation, ' ' * len(punctuation))  # 创建翻译表，将标点符号替换为空格
         Pre = ''  # 初始化前一个单词为空字符串
         while l != '':  # 循环读取文件的每一行，直到文件结束
@@ -41,7 +41,7 @@ def process_file(file_path):
                 if Pre != '':  # 如果前一个单词不为空
                     MyGraph[Pre].append(i)  # 将当前单词添加到前一个单词的邻接列表中
                 Pre = i  # 更新前一个单词为当前单词
-            l = f.readline()  # 读取文件的下一行
+            l = f.readline().lower()  # 读取文件的下一行
         for i in MyGraph.keys():  # 遍历图中的每个节点
             MyGraph[i] = dict(Counter(MyGraph[i]))  # 统计每个节点的邻接节点的出现次数
         VisSet = set()  # 创建一个空集合，用于记录访问过的节点
